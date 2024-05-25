@@ -2,6 +2,7 @@ package emu.grasscutter.data.common;
 
 import emu.grasscutter.data.excels.ProudSkillData;
 import emu.grasscutter.game.ability.Ability;
+import emu.grasscutter.game.props.FightProperty;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.objects.*;
 import java.util.*;
@@ -50,11 +51,18 @@ public class DynamicFloat {
     }
 
     public float get(Ability ability, float defaultValue) {
+        // Add ALL FIGHT PROPS of ability owner at this instant (some abilities need this)
+        // DO NOT USE CLIENT GADGET ON THIS as THIS METHOD WILL TAKE THE CLIENT GADGET'S STATS
+        if (ability.getOwner().getFightProperties() != null) {
+            ability.getOwner().getFightProperties().entrySet().forEach(fightPropEntry -> {
+                ability.getAbilitySpecials().put(FightProperty.getPropById(fightPropEntry.getKey()).name(), fightPropEntry.getValue());
+            });
+        }
         return this.get(ability.getAbilitySpecials(), defaultValue);
     }
 
     public float get(Ability ability) {
-        return this.get(ability.getAbilitySpecials(), 0f);
+        return this.get(ability, 0f);
     }
 
     public float get(Object2FloatMap<String> props, float defaultValue) {

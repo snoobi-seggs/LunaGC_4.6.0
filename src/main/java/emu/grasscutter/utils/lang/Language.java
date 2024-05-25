@@ -223,9 +223,14 @@ public final class Language {
 
     private static Int2ObjectMap<String> loadTextMapFile(String language, IntSet nameHashes) {
         Int2ObjectMap<String> output = new Int2ObjectOpenHashMap<>();
+        // Check if TextMapEN OR TextMap_EN exists
+        Path textMapFilePath = getResourcePath("TextMap/TextMap" + language + ".json");
+        if (!Files.exists(textMapFilePath)) {
+            textMapFilePath = getResourcePath("TextMap/TextMap_" + language + ".json");
+        }
         try (BufferedReader file =
                 Files.newBufferedReader(
-                        getResourcePath("TextMap/TextMap" + language + ".json"), StandardCharsets.UTF_8)) {
+                        textMapFilePath, StandardCharsets.UTF_8)) {
             Matcher matcher = textMapKeyValueRegex.matcher("");
             return new Int2ObjectOpenHashMap<>(
                     file.lines()

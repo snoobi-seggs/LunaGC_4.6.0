@@ -345,9 +345,9 @@ public class AbilityModifier implements Serializable {
         public DynamicFloat valueRangeMax;
         public String overrideMapKey;
 
-        public int param1;
-        public int param2;
-        public int param3;
+        public DynamicFloat param1;
+        public DynamicFloat param2;
+        public DynamicFloat param3;
 
         public String funcName;
         public LuaCallType luaCallType;

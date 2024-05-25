@@ -12,7 +12,7 @@ public class HomeworldDefaultSaveData {
 
     @SerializedName(
             value = "homeBlockLists",
-            alternate = {"PKACPHDGGEI", "AKOLOBLHDFK", "KFHBFNPDJBE"})
+            alternate = {"PKACPHDGGEI", "AKOLOBLHDFK", "KFHBFNPDJBE", "blockArrangementInfoList"})
     List<HomeBlock> homeBlockLists;
 
     @SerializedName(

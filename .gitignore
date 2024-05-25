@@ -61,6 +61,9 @@ tmp/
 /language
 /languages
 /proto
+lib/kcp-1.5.1.jar
+b.bat
+run.bat
 
 /*.jar
 /*.sh
